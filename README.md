@@ -1,6 +1,6 @@
 # DeepLearning
 
-## Tensorflow설치
+## Tensorflow
 - conda install -c apple tensorflow-deps
 - pip install tensorflow-macos
 - pip install tensorflow-metal
