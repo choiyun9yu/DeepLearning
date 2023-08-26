@@ -2,6 +2,15 @@
 
 ## Requirement
 
+## Pytorch Library
+- torch : 메인 네임스페이스, 텐서 등의 다양한 수학 함수가 포함된 라이브러리
+- torch.autograd : 자동 미분 기능을 제공하는 라이브러리
+- torch.nn : 신경망 구축을 위한 데이터 구조나 레이어 등의 라이브러리
+- torch.multiprocessing : 병럴처리 기능을 제공하는 라이브러리
+- torch.optim : 가중치 파라미터 최적화 알고리즘 제공하는 라이브러리
+- torch.utils : 데이터 조작 등 유틸리티 기능 제공하는 라이브러리
+- torch.onnx : ONNX(Open Neural Network Exchange), 서로 다른 프레임워크 간의 모델을 공유할 때 사용
+
 ## Directory Architecure
 - model.py : 모델 클래스 정의하는 코드
 - trainer.py : 데이터 받아와서 모델 객체를 학습하기 위한 트레이너 정의하는 코드
@@ -31,11 +40,20 @@
 - Regularization 
     - Underfitting : Model Capacity 키우기
     - Overfitting : Batch Normalization, Dropout 
-- Loss Function  
+
+- Activation Fucntion : 이전 층의 값을 다음 층으로 비선형 변환해서 전달
+    - sigmoid : 입력, 은닉층 사용 (이진분류의 출력층)
+    - ReLU : 입력, 은닉층 사용 (생성모델의 출력층)
+    - softmax : 주로 출력층에서 사용 (다중 분류, 원핫인코딩 이진분류의 출력층)
+    - tanh : 입력, 은닉층 사용 
+
+- Loss Function : 가중치 파라미터 최적화를 위한 손실 비용 계산 함수  
     - 이진 분류 : binary cross entropy, 
     - 다중 분류 : cross entropy
-    - 회귀 : MSE
-- Optimaizer : Adam
+    - 회귀 : MSE, MAE, RMSE, RMAE, RMAPE ...
+
+- Optimaizer : 가중치 파라미터 최적화를 위한 경사하강법
+    - Adam : 잘 모르겠으면 아담 사용
 
 ### 5. 평가
 - Train dataset으로 Weight Parameter 결정
