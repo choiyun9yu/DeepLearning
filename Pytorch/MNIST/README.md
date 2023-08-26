@@ -29,13 +29,24 @@
 
 ### 3. 데이터 전처리 및 분석
 - 수집 데이터를 학습/검증/평가 데이터 셋으로 분할
+    - torch.utils.data.TensorDataset  
+  
+        dataset = TensorDataset(X, z)
+  
+    - torch.utils.data.DataLoader : 데이터 전체를 보관했다가 실제 모델 학습을 할 때 `batch_size` 크기만큼 데이터를 가져옴
+  
+        dataloader = DataLoader(
+            dataset,
+            batchsize = n,
+            suffle = True
+        )
+  
 - 데이터 유형에 따른 전처리
     - 테뷸러 데이터 : Null제거, 스케일링(정규화)
     - 이미지 데이터 : 데이트 증강, 크롭핑
     - 텍스트 데이터 : 정제, 분절, 저빈도 단어 제거
 
 ### 4. 알고리즘 적용
-
 - 가설 설정
 - 외형 구성
   
@@ -73,6 +84,8 @@
         - optim.lr_scheduler.ExponentialLR : 에포크마다 이전 학습률에 감마만큼 곱함
         - optim.lr_scheduler.CosineAnnealingLR : 학습률을 코사인(cosine) 함수의 형태처럼 변화시켜 학습률일 커지기도 하고 작아지기도 함
         - optim.lr_scheduler.ReduceLROnPlateau : 학습이 잘되는지 아닌지에 따라 동적으로 학습률 변화
+
+
 
 ### 5. 평가
 - Train dataset으로 Weight Parameter 결정
