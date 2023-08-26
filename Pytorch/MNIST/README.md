@@ -35,30 +35,56 @@
     - 텍스트 데이터 : 정제, 분절, 저빈도 단어 제거
 
 ### 4. 알고리즘 적용
+
 - 가설 설정
 - 외형 구성
+  
+    class modelName(torch.nn.Module):
+        def __init__():
+            super.__init__()
+        self.layer = torch.nn.Sequential(
+            # 은닉층 정의
+        )
+        
+        def forward():
+            y = self.layer(X)
+            return y
+
 - Regularization 
     - Underfitting : Model Capacity 키우기
     - Overfitting : Batch Normalization, Dropout 
 
 - Activation Fucntion : 이전 층의 값을 다음 층으로 비선형 변환해서 전달
-    - sigmoid : 입력, 은닉층 사용 (이진분류의 출력층)
-    - ReLU : 입력, 은닉층 사용 (생성모델의 출력층)
-    - softmax : 주로 출력층에서 사용 (다중 분류, 원핫인코딩 이진분류의 출력층)
-    - tanh : 입력, 은닉층 사용 
+    - torch.nn.functional.Sigmoid : 입력, 은닉층 사용 (이진분류의 출력층)
+    - torch.nn.functional.ReLU : 입력, 은닉층 사용 (생성모델의 출력층)
+    - torch.nn.functional.softmax : 주로 출력층에서 사용 (다중 분류, 원핫인코딩 이진분류의 출력층)
+    - torch.nn.functional.tanh : 입력, 은닉층 사용 
 
 - Loss Function : 가중치 파라미터 최적화를 위한 손실 비용 계산 함수  
-    - 이진 분류 : binary cross entropy, 
-    - 다중 분류 : cross entropy
-    - 회귀 : MSE, MAE, RMSE, RMAE, RMAPE ...
+    - torch.nn.BCELoss : 이진 분류를 위해 사용
+    - torch.nn.CrossEntropyLoss : 다중 클래스 분류를 위해 사용
+    - torch.nn.MSELoss : 회귀 모델에서 사용
 
 - Optimaizer : 가중치 파라미터 최적화를 위한 경사하강법
-    - Adam : 잘 모르겠으면 아담 사용
+    - torch.optim.Adam : 잘 모르겠으면 아담 사용
+    - Scheduler 
+        - optim.lr_scheduler.LambdaLR : 람다(lambda) 함수를 이용해 그 결과를 학습률로 설정
+        - optim.lr_scheduler.StepLR : 단계(step)마다 학습률을 감마(gamma) 비율만큼 감소
+        - optim.lr_scheduler.MultiStepLR : `StepLR`과 비슷하지만 특정 단계가 아니라 지정된 에포크에만 감마 비율로 감소
+        - optim.lr_scheduler.ExponentialLR : 에포크마다 이전 학습률에 감마만큼 곱함
+        - optim.lr_scheduler.CosineAnnealingLR : 학습률을 코사인(cosine) 함수의 형태처럼 변화시켜 학습률일 커지기도 하고 작아지기도 함
+        - optim.lr_scheduler.ReduceLROnPlateau : 학습이 잘되는지 아닌지에 따라 동적으로 학습률 변화
 
 ### 5. 평가
 - Train dataset으로 Weight Parameter 결정
 - Validation dataset으로 Hyper Parameter 결정
 - Test dataset으로 Model 결정
+
+- Monitering
+    - torchmetrics.BinaryAccuracy
+    - torchmetrics.MulticlassAccuracy
+    - torchmetrics.MeanSquaredError
+
 
 ### 6. 배포
 - RESTful API를 통한 배포
