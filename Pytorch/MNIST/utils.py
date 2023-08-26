@@ -1,6 +1,6 @@
 import torch
 
-
+# 데이터 로드 함수
 def load_mnist(is_train=True, flatten=True):
     from torchvision import datasets, transforms
 
@@ -20,6 +20,7 @@ def load_mnist(is_train=True, flatten=True):
     return x, y
 
 
+# 데이터 분할
 def split_data(x, y, train_ratio=.8):
     train_cnt = int(x.size(0) * train_ratio)
     valid_cnt = x.size(0) - train_cnt
@@ -40,6 +41,8 @@ def split_data(x, y, train_ratio=.8):
     return x, y
 
 
+# model.py에서 hidden_sizes[] 를 통해 쌓을 Block의 크기를 지정했다.
+# 사용자가 일일이 블럭 크기 지정하는 것은 번거로울 수 있기에 사용자가 모델의 계층 개수만 정해주면 자동으로 등차수열을 적용하여 hidden_size 구성하는 함수
 def get_hidden_sizes(input_size, output_size, n_layers):
     step_size = int((input_size - output_size) / n_layers)
 

@@ -22,6 +22,7 @@ class Block(nn.Module):
         
         # 입력받은 인자에 따라 정규화과정 처리하는 함수
         def get_regularizer(use_batch_norm, size):
+            # use_batch_norm 변수로 배치정규화와 드롭아웃 중 양자 택일
             return nn.BatchNorm1d(size) if use_batch_norm else nn.Dropout(dropout_p)
         
         # 서브모듈에서 사용할 선형계층, 활성화 함수, 정규화 정의

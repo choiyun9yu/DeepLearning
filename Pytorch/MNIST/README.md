@@ -42,10 +42,9 @@
     class modelName(torch.nn.Module):
         def __init__():
             super.__init__()
-        self.layer = torch.nn.Sequential(
-            # 은닉층 정의
-        )
-        
+            self.layer = torch.nn.Sequential(
+                # 은닉층 정의
+            )
         def forward():
             y = self.layer(X)
             return y

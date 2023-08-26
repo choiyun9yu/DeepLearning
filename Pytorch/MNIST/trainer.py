@@ -3,6 +3,8 @@ import numpy as np
 
 import torch
 
+
+
 class Trainer():
 
     def __init__(self, model, optimizer, crit):
@@ -12,6 +14,7 @@ class Trainer():
 
         super().__init__()
 
+    # 
     def _batchify(self, x, y, batch_size, random_split=True):
         if random_split:
             indices = torch.randperm(x.size(0), device=x.device)
@@ -23,8 +26,9 @@ class Trainer():
 
         return x, y
 
+    # 한 이터레이션의 학습을 위한 for 반복문 구현
     def _train(self, x, y, config):
-        self.model.train()
+        self.model.train() # train() 호출하여 학습 모드로 전환
 
         x, y = self._batchify(x, y, config.batch_size)
         total_loss = 0
@@ -47,6 +51,7 @@ class Trainer():
 
         return total_loss / len(x)
 
+    # 
     def _validate(self, x, y, config):
         # Turn evaluation mode on.
         self.model.eval()
@@ -67,6 +72,7 @@ class Trainer():
 
             return total_loss / len(x)
 
+    # 학습과 검증을 아우르는 큰 loop와 학습과 검증 내 작은 loop 중 큰 loop 정의
     def train(self, train_data, valid_data, config):
         lowest_loss = np.inf
         best_model = None
@@ -78,6 +84,7 @@ class Trainer():
             # You must use deep copy to take a snapshot of current best weights.
             if valid_loss <= lowest_loss:
                 lowest_loss = valid_loss
+                # sate_dict() : 모델의 가중치 파라미터값을 JSON 형태로 변환 리턴
                 best_model = deepcopy(self.model.state_dict())
 
             print("Epoch(%d/%d): train_loss=%.4e  valid_loss=%.4e  lowest_loss=%.4e" % (
@@ -89,4 +96,5 @@ class Trainer():
             ))
 
         # Restore to best model.
+        # load_state_dict() : 학습이 종료되면 best모델을 self.model에 다시 로딩
         self.model.load_state_dict(best_model)
