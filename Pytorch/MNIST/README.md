@@ -18,6 +18,8 @@
 - train.py : 사용자로부터 하이퍼파라미터를 입력받아 필요한 객체들을 준비하여 학습하는 코드
 - predict.py : 사용자로부터 기학습된 모델의 추론을 위한 샘플을 읿력받아 추론 수행하는 코드
 
+    $ python train.py --model_fn tmp.pth --gpu_id -1 --batch_size 256 --n_epochs 20 --n_layers 5
+
 ## Work Flow 
 ### 1. 문제 정의
 - 주어진 복잡한 문제를 단순화
