@@ -12,28 +12,29 @@ from utils import split_data
 from utils import get_hidden_sizes
 
 
+# 사용자 입력 파라미터 config에 담는다.
 def define_argparser():
-    p = argparse.ArgumentParser()
+    p = argparse.ArgumentParser()                           # argparse 라이브러리를 통해 다양한 입력 파라미터들을 손쉽게 정의하고 처리
 
-    p.add_argument('--model_fn', required=True)
-    p.add_argument('--gpu_id', type=int, default=0 if torch.cuda.is_available() else -1)
+    p.add_argument('--model_fn', required=True)             # 모델 가중치가 저장될 파일 경로
+    p.add_argument('--gpu_id', type=int, default=0 if torch.cuda.is_available() else -1)    # 학습이 수행될 그래픽 카드 인덱스 번호
 
-    p.add_argument('--train_ratio', type=float, default=.8)
+    p.add_argument('--train_ratio', type=float, default=.8) # 학습 데이터 내에서 검증 데이터가 차지할 비율
 
-    p.add_argument('--batch_size', type=int, default=256)
-    p.add_argument('--n_epochs', type=int, default=20)
+    p.add_argument('--batch_size', type=int, default=256)   # 미니배치 크기
+    p.add_argument('--n_epochs', type=int, default=20)      # 에포크 개수 
 
-    p.add_argument('--n_layers', type=int, default=5)
-    p.add_argument('--use_dropout', action='store_true')
-    p.add_argument('--dropout_p', type=float, default=.3)
+    p.add_argument('--n_layers', type=int, default=5)       # 모델의 계층 개수
+    p.add_argument('--use_dropout', action='store_true')    # 드롭아웃 사용 여부
+    p.add_argument('--dropout_p', type=float, default=.3)   # 드롭아웃 사용 시 드롭 확률
 
-    p.add_argument('--verbose', type=int, default=1)
+    p.add_argument('--verbose', type=int, default=1)        # 확습 시 로그 출력의 정도
 
     config = p.parse_args()
 
     return config
 
-
+# 작성한 코드들을 모아서 학습이 진행되도록 하는 함수
 def main(config):
     # Set device based on user defined configuration.
     device = torch.device('cpu') if config.gpu_id < 0 else torch.device('cuda:%d' % config.gpu_id)

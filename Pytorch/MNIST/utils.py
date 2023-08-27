@@ -15,23 +15,24 @@ def load_mnist(is_train=True, flatten=True):
     y = dataset.targets
 
     if flatten:
-        x = x.view(x.size(0), -1)
+        x = x.view(x.size(0), -1)   # view(rows, columns) : 텐서 크기 변경, -1은 알아서 맞추라는 옵션
 
     return x, y
 
 
 # 데이터 분할
 def split_data(x, y, train_ratio=.8):
-    train_cnt = int(x.size(0) * train_ratio)
-    valid_cnt = x.size(0) - train_cnt
+    train_cnt = int(x.size(0) * train_ratio)    # 학습 데이터셋 수
+    valid_cnt = x.size(0) - train_cnt           # 검증 데이터셋 수
 
     # Shuffle dataset to split into train/valid set.
-    indices = torch.randperm(x.size(0))
-    x = torch.index_select(
+    indices = torch.randperm(x.size(0))  # torch.randperm(n): 0부터 n-1개의 랜덤한 정수 순열을 리턴
+    x = torch.index_select(     # 텐서 슬라이싱 : torch.index_select(검색대상, aixs, index) → Tensor
         x,
         dim=0,
         index=indices
-    ).split([train_cnt, valid_cnt], dim=0)
+    ).split([train_cnt, valid_cnt], dim=0)      # 학습셋과 검증셋으로 분할
+    # 타겟에 대해서도 마찬가지
     y = torch.index_select(
         y,
         dim=0,

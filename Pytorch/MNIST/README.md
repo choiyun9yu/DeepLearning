@@ -30,11 +30,9 @@
 ### 3. 데이터 전처리 및 분석
 - 수집 데이터를 학습/검증/평가 데이터 셋으로 분할
     - torch.utils.data.TensorDataset  
-  
         dataset = TensorDataset(X, z)
   
     - torch.utils.data.DataLoader : 데이터 전체를 보관했다가 실제 모델 학습을 할 때 `batch_size` 크기만큼 데이터를 가져옴
-  
         dataloader = DataLoader(
             dataset,
             batchsize = n,
@@ -49,7 +47,6 @@
 ### 4. 알고리즘 적용
 - 가설 설정
 - 외형 구성
-  
     class modelName(torch.nn.Module):
         def __init__():
             super.__init__()
