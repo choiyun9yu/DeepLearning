@@ -134,4 +134,4 @@
 - Convolutaion Layer : 이미지를 압축해서 특징을 가져올 때 사이즈 줄임
 - Pooling Layer : 이미지를 압축해서 특징을 가져올 때 하나의 정보만 가져옴
 - Fully Connected Layer : 발견한 특징을 기반으로 이미지를 분류하는데 사용
-- LCN(Local Contrast Normalization)
+- LCN(Local Contrast Normalization) : 국소 콘트라스트 정규화 (카메라 노출 등 환경 변화에 따라 이미지 밝기, 대비가 크게 변하는 경우 사용)
