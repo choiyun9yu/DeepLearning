@@ -25,3 +25,5 @@
 
 
 ### 3. cd .
+
+* [ref](187cm.tistory.com/26)
