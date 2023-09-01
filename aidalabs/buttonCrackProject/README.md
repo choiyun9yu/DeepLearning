@@ -24,4 +24,4 @@
 ## 2-2. How to use label-studio
 
 
-### 3. 
+### 3. cd .
