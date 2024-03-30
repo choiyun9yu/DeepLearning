@@ -1,0 +1,12 @@
+names:
+- fish
+- jellyfish
+- penguin
+- puffin
+- shark
+- starfish
+- stingray
+nc: 7
+test: /Users/yun9yu/Documents/Git-Hub/DeepLearning/aidalabs/buttonCrackProject/data/aquarium_data/test/images
+train: /Users/yun9yu/Documents/Git-Hub/DeepLearning/aidalabs/buttonCrackProject/data/aquarium_data/train/images
+val: /Users/yun9yu/Documents/Git-Hub/DeepLearning/aidalabs/buttonCrackProject/data/aquarium_data/valid/images
